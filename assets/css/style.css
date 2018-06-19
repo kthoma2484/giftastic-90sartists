@@ -1,0 +1,11 @@
+.body {
+    background-color: darkblue;
+}
+
+.card-body {
+    background-image: url("../images/world-travel-bkgd.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 900px;
+}
+
