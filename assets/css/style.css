@@ -3,9 +3,13 @@
 }
 
 .card-body {
-    background-image: url("../images/world-travel-bkgd.jpg");
+    background-image: url("../images/90sr&b.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     min-height: 900px;
 }
 
+#gif-add {
+    z-index: 1;
+}
