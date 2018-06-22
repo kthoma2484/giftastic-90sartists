@@ -2,14 +2,45 @@
     background-color: darkblue;
 }
 
-.card-body {
+.gif-display {
     background-image: url("../images/90sr&b.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    min-height: 900px;
+    max-height: 920px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
 }
 
 #gif-add {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    max-width: 80%;
+    min-height: 900px;
+    margin: 10px;
     z-index: 1;
+}
+
+#gif-fav {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    max-width: 20%;
+    min-height: 900px;
+    background-image: url("../images/90sr&b.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 10px;
+    z-index: 1;
+}
+
+
+.gifCard {
+    margin: 15px;
+    overflow: auto;
+    max-height: 300px;
+    min-width: 300px;
 }
