@@ -12,7 +12,7 @@ $(function () {
     let artistGif = "";
  
     function gifSearch() {
-        
+
         artistGif = $("#artist").val().trim();
 
         console.log(artistGif + "this is search term")
@@ -60,8 +60,6 @@ $(function () {
                     let h5 = $("<h5 class='title'>")
                     h5.text("Title: " + title);
                     
-                    // create a favorites star
-                    let fav = $("<div class='fav-star'>" + "&#x2605;" + " favorite "+ "</div>")
                     // prepend the gifCard to the card-body div in html
                     $("#gif-add").prepend(gifCard);
     
@@ -69,12 +67,12 @@ $(function () {
                     $("[data-number='" + uniqueId + "']").append(gifImage);
                     $("[data-number='" + uniqueId + "']").append(h5);
                     $("[data-number='" + uniqueId + "']").append(p);
-                    $("[data-number='" + uniqueId + "']").append(fav)
 
                 }
 
             }
 
+            // start and pause gif animation 
             $(".gif-here").on("click", function () {
                 console.log('gif was clicked');
                 let state = $(this).attr("data-state");
@@ -111,11 +109,8 @@ $(function () {
 }
  popList();
 
-    // Function for displaying movie data
+    // Function for displaying search data
     function renderButtons() {
-
-        artistGif = $("#artist").val().trim();
-        uniqueId = i.val()+artistGif
 
         // Looping through the array of button created
         for (var i = 0; i < artistList.length; i++) {
@@ -138,6 +133,7 @@ $(function () {
 
             artistList.push(artistGif)
             }
+            console.log('btn added')
         }
     }
 
@@ -153,11 +149,13 @@ $(function () {
 
         // Add artist from the textbox to our array
         artistList.push(artist);
+        
+        // clear gif display section for new search of all prior search gifs
+        $("#gif-add").empty();
 
-        // Calling renderButtons which handles the processing of our movie array
+        // Calling renderButtons which handles the processing of artist array
         renderButtons();
     });
 
-
-
+   $ 
 });

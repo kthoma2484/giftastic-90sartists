@@ -28,22 +28,11 @@ footer {
     display: flex;
     flex: 1;
     flex-wrap: wrap;
-    max-width: 80%;
+    max-width: 100%;
     margin: 10px;
     max-height: 900px;
 
 }
-
-#gif-fav {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    max-width: 20%;
-    max-height: 900px;
-    background-color: rgba(11, 24, 201, 0.4);
-    margin: 20px;
-}
-
 
 .gifCard {
     z-index: 1;
