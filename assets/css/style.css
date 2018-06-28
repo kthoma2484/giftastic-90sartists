@@ -20,8 +20,14 @@ header {
     min-width: 100%;
 }
 
+#target,
+#buttons-here {
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .gif-display {
-    top: 200px;
     min-height: 800px;
     display: flex;
     flex-wrap: wrap;
