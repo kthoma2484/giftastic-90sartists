@@ -1,7 +1,7 @@
 $(function () {
 
-    let artistList = ["SWV", "Boys 2 Men", "Escape", "Mint Condition", "LL Cool J", "Tupac"]
-
+    let artistList = ["Janet Jackson", "R.Kelly", "Mariah Carey", "Boyz II Men", "TLC", "Monica", "Mary J Blige", "LL Cool J", "Tupac"]
+    console.log(artistList)
     // store an array of response.data in response.data variable
     let gifButtons = [];
     let rating = "";
@@ -11,10 +11,7 @@ $(function () {
     let title = "";
     let artistGif = "";
  
-    function gifSearch() {
-
-        artistGif = $("#artist").val().trim();
-
+    function ajaxCall() {
         console.log(artistGif + "this is search term")
         let queryURL = "https://api.giphy.com/v1/gifs/search?api_key=HMBc7lp8ehd8TN5zb2kiFunqqIjMvfEU&q=";
 
@@ -24,8 +21,7 @@ $(function () {
             method: "GET"
         })
         .then(function (response) {
-         //   responseArray.push(response.data);
-          //  console.log(responseArray);
+        
             console.log(response)
             for (let i = 0; i < 10; i++) {
 
@@ -42,7 +38,7 @@ $(function () {
                         
                     // create a card for each gif
                     let gifCard = $("<div class='card gifCard' style='width: 18rem;margin:10px'>");
-                    gifCard.attr("data-number", uniqueId);
+                    gifCard.attr("data-name", uniqueId);
                     console.log(i + " + was created")
     
                     // create an image tag with src property and response result
@@ -64,14 +60,15 @@ $(function () {
                     $("#gif-add").prepend(gifCard);
     
                     // append the rating header and image to the gifElem
-                    $("[data-number='" + uniqueId + "']").append(gifImage);
-                    $("[data-number='" + uniqueId + "']").append(h5);
-                    $("[data-number='" + uniqueId + "']").append(p);
+                    $("[data-name='" + uniqueId + "']").append(gifImage);
+                    $("[data-name='" + uniqueId + "']").append(h5);
+                    $("[data-name='" + uniqueId + "']").append(p);
 
                 }
 
             }
-
+            // unbind/clear prior click target events and free up DOM
+            $(".gif-here").unbind();
             // start and pause gif animation 
             $(".gif-here").on("click", function () {
                 console.log('gif was clicked');
@@ -84,60 +81,57 @@ $(function () {
                     $(this).attr("data-state", "still");
                   }
             });
-
+            // add new search to artist array for button pop pull only if not in index
+            if (artistList.indexOf(artistGif) === -1) {
+                artistList.push(artistGif);
+            }
+            // populate buttons on page load with new search button
+            popList();
         });
     }
 
+    // run search for new input value
+    function gifSearch() {
+        artistGif = $("#artist").val().trim();
+        ajaxCall();
+    }
+
+    // see above
     function popList () {
+        $("#buttons-here").html("");
         for (var i = 0; i < artistList.length; i++) {
+            
+            uniqueId = artistList[i];
+
             // create search button
             var a = $("<button>");
             
             // Adding a class of gif-btn to our button
             a.addClass("gif-btn");
-            
-            // Adding a data-attribute
-            a.attr("data-name", uniqueId);
           
             // Providing the gif-btn text
             a.text(artistList[i]);
 
+            // Adding a data-attribute
+            a.attr("data-name", uniqueId);
+
             // Add the button to the buttons-here div
             $("#buttons-here").append(a);
 
     }
+    $(".gif-btn").unbind();
+    // empty prior gif searches and search button specific gifs
+    $(".gif-btn").on("click", function(target) {
+        $("#gif-add").empty();
+        artistGif = $(this).attr("data-name");
+        console.log(artistGif);
+        ajaxCall();
+    });
 }
+// populate buttons on page load
  popList();
 
-    // Function for displaying search data
-    function renderButtons() {
-
-        // Looping through the array of button created
-        for (var i = 0; i < artistList.length; i++) {
-
-            if (artistList.indexOf(artistGif) === -1) {
-            // create search button
-            var a = $("<button>");
-            
-            // Adding a class of gif-btn to our button
-            a.addClass("gif-btn");
-            
-            // Adding a data-attribute
-            a.attr("data-number", uniqueId);
-          
-            // Providing the gif-btn text
-            a.text(artistGif);
-
-            // Add the button to the buttons-here div
-            $("#buttons-here").append(a);
-
-            artistList.push(artistGif)
-            }
-            console.log('btn added')
-        }
-    }
-
-    // This function handles events where a gif button is clicked
+    // This function handles events when a gif button is clicked
     $("#target").submit(function(event) {
         event.preventDefault();
     
@@ -147,15 +141,9 @@ $(function () {
         // Call function to display gifs
         gifSearch();
 
-        // Add artist from the textbox to our array
-        artistList.push(artist);
-        
         // clear gif display section for new search of all prior search gifs
         $("#gif-add").empty();
 
-        // Calling renderButtons which handles the processing of artist array
-        renderButtons();
     });
 
-   $ 
 });
